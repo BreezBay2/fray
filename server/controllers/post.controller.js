@@ -52,3 +52,68 @@ export const deletePost = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
+
+export const commentOnPost = async (req, res) => {
+    try {
+        const { text } = req.body;
+        const postId = req.params.id;
+        const userId = req.user._id;
+
+        if (!text) {
+            return res.status(400).json({ error: "Comment must have text." });
+        }
+
+        const post = await Post.findById(postId);
+
+        if (!post) {
+            return res.status(404).json({ error: "Post not found." });
+        }
+
+        const comment = { user: userId, text: text };
+
+        post.comments.push(comment);
+        await post.save();
+
+        res.status(200).json(post);
+    } catch (error) {
+        console.log("Error in Comment on Post Controller.", error);
+        res.status(500).json({ error: "Internal Server Error." });
+    }
+};
+
+export const getAllPosts = async (req, res) => {
+    try {
+        const posts = await Post.find()
+            .sort({ createdAt: -1 })
+            .populate({ path: "user", select: "-password" });
+
+        if (posts.length === 0) {
+            return res.status(200).json([]);
+        }
+
+        res.status(200).json(posts);
+    } catch (error) {
+        console.log("Error in Get All Posts Controller.", error);
+        res.status(500).json({ error: "Internal Server Error." });
+    }
+};
+
+export const getUserPosts = async (req, res) => {
+    try {
+        const { username } = req.params;
+
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ error: "User not found." });
+        }
+
+        const posts = await Post.find({ user: user._id })
+            .sort({ createdAt: -1 })
+            .populate({ path: "user", select: "-password" });
+
+        res.status(200).json(posts);
+    } catch (error) {
+        console.log("Error in Get User Posts Controller.", error);
+        res.status(500).json({ error: "Internal Server Error." });
+    }
+};
