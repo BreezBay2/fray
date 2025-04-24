@@ -4,6 +4,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/auth.routes.js";
+import postRoutes from "./routes/post.routes.js";
 
 import connectMongoDB from "./db/connectMongoDB.js";
 
@@ -18,6 +19,7 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/posts", postRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
