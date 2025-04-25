@@ -1,8 +1,68 @@
 import React, { useState } from "react";
 import "../styles/LoginSignupPage.css";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const LoginSignupPage = () => {
     const [formType, setFormType] = useState("");
+    const [loginFormData, setLoginFormData] = useState({
+        username: "",
+        password: "",
+    });
+    const [signUpFormData, setSignUpFormData] = useState({
+        username: "",
+        fullname: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    });
+
+    const queryClient = useQueryClient();
+
+    const {
+        mutate: login,
+        isPending,
+        isError,
+        error,
+    } = useMutation({
+        mutationFn: async ({ username, password }) => {
+            try {
+                const res = await fetch("/api/auth/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ username, password }),
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.error || "Failed to login");
+                }
+            } catch (error) {
+                throw new Error(error);
+            }
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["authUser"] });
+        },
+    });
+
+    const handleLoginSubmit = (e) => {
+        e.preventDefault();
+        login(loginFormData);
+    };
+
+    const handleLoginInputChange = (e) => {
+        setLoginFormData({ ...loginFormData, [e.target.name]: e.target.value });
+    };
+
+    const handleSignUpInputChange = (e) => {
+        setSignUpFormData({
+            ...signUpFormData,
+            [e.target.name]: e.target.value,
+        });
+    };
 
     const signUpLinkClicked = () => {
         setFormType(" active");
@@ -11,15 +71,29 @@ const LoginSignupPage = () => {
     const loginLinkClicked = () => {
         setFormType("");
     };
+
     return (
         <div className="authentication-page">
             <div className={`authentication-container${formType}`}>
                 <div className="authentication-form login">
-                    <form>
+                    <form onSubmit={handleLoginSubmit}>
                         <h1>Login</h1>
-                        <input type="text" placeholder="Username" />
-                        <input type="password" placeholder="Password" />
-                        <button>Login</button>
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            name="username"
+                            value={loginFormData.username}
+                            onChange={handleLoginInputChange}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            name="password"
+                            value={loginFormData.password}
+                            onChange={handleLoginInputChange}
+                        />
+                        <button>{isPending ? "Loading..." : "Login"}</button>
+                        {isError && <p>{error.message}</p>}
                         <div className="sign-up-link">
                             <p>
                                 Don't have an account?{" "}
@@ -32,11 +106,41 @@ const LoginSignupPage = () => {
                 <div className="authentication-form sign-up">
                     <form>
                         <h1>Sign Up</h1>
-                        <input type="text" placeholder="Username" />
-                        <input type="text" placeholder="Full Name" />
-                        <input type="email" placeholder="E-Mail" />
-                        <input type="password" placeholder="Password" />
-                        <input type="password" placeholder="Confirm Password" />
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            name="username"
+                            value={signUpFormData.username}
+                            onChange={handleSignUpInputChange}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Full Name"
+                            name="fullname"
+                            value={signUpFormData.fullname}
+                            onChange={handleSignUpInputChange}
+                        />
+                        <input
+                            type="email"
+                            placeholder="E-Mail"
+                            name="email"
+                            value={signUpFormData.email}
+                            onChange={handleSignUpInputChange}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            name="password"
+                            value={signUpFormData.password}
+                            onChange={handleSignUpInputChange}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Confirm Password"
+                            name="confirmPassword"
+                            value={signUpFormData.confirmPassword}
+                            onChange={handleSignUpInputChange}
+                        />
                         <button>Sign Up</button>
                         <div className="sign-up-link">
                             <p>
