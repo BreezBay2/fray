@@ -20,9 +20,9 @@ const LoginSignupPage = () => {
 
     const {
         mutate: login,
-        isPending,
-        isError,
-        error,
+        isPending: loginPending,
+        isError: loginErrorFound,
+        error: loginError,
     } = useMutation({
         mutationFn: async ({ username, password }) => {
             try {
@@ -37,7 +37,47 @@ const LoginSignupPage = () => {
                 const data = await res.json();
 
                 if (!res.ok) {
-                    throw new Error(data.error || "Failed to login");
+                    throw new Error(data.error || "Failed to login.");
+                }
+            } catch (error) {
+                throw new Error(error);
+            }
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["authUser"] });
+        },
+    });
+
+    const {
+        mutate: signup,
+        isPending: signupPending,
+        isError: signupErrorFound,
+        error: signupError,
+    } = useMutation({
+        mutationFn: async ({
+            username,
+            fullname,
+            email,
+            password,
+            confirmPassword,
+        }) => {
+            try {
+                const res = await fetch("/api/auth/signup", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        username,
+                        fullname,
+                        email,
+                        password,
+                        confirmPassword,
+                    }),
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.error || "Failed to create account.");
                 }
             } catch (error) {
                 throw new Error(error);
@@ -51,6 +91,11 @@ const LoginSignupPage = () => {
     const handleLoginSubmit = (e) => {
         e.preventDefault();
         login(loginFormData);
+    };
+
+    const handleSignUpSubmit = (e) => {
+        e.preventDefault();
+        signup(signUpFormData);
     };
 
     const handleLoginInputChange = (e) => {
@@ -92,8 +137,8 @@ const LoginSignupPage = () => {
                             value={loginFormData.password}
                             onChange={handleLoginInputChange}
                         />
-                        <button>{isPending ? "Loading..." : "Login"}</button>
-                        {isError && <p>{error.message}</p>}
+                        <button>{loginPending ? "Loading..." : "Login"}</button>
+                        {loginErrorFound && <p>{loginError.message}</p>}
                         <div className="sign-up-link">
                             <p>
                                 Don't have an account?{" "}
@@ -104,7 +149,7 @@ const LoginSignupPage = () => {
                 </div>
 
                 <div className="authentication-form sign-up">
-                    <form>
+                    <form onSubmit={handleSignUpSubmit}>
                         <h1>Sign Up</h1>
                         <input
                             type="text"
@@ -141,7 +186,10 @@ const LoginSignupPage = () => {
                             value={signUpFormData.confirmPassword}
                             onChange={handleSignUpInputChange}
                         />
-                        <button>Sign Up</button>
+                        <button>
+                            {signupPending ? "Loading..." : "Sign Up"}
+                        </button>
+                        {signupErrorFound && <p>{signupError.message}</p>}
                         <div className="sign-up-link">
                             <p>
                                 Already have an account?{" "}
