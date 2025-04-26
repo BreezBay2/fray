@@ -1,7 +1,6 @@
 .sidebar-container {
     width: 300px;
-    max-width: 300px;
-    background-color: #113b3d;
+    background-color: #eceff1;
     display: flex;
     justify-content: center;
 }
@@ -15,6 +14,7 @@
 }
 
 .sidebar-content ul {
+    padding: 0 30px;
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -24,16 +24,24 @@
 
 .sidebar-link {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 12px;
+    padding: 10px 20px;
     align-items: center;
-    color: #fff;
+    color: #012b36;
     text-decoration: none;
-    border-radius: 40px;
+    border-radius: 15px;
+}
+
+.sidebar-logo {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: #012b36;
 }
 
 .sidebar-link:hover {
-    background-color: #186265;
+    background-color: #6c71c4;
 }
 
 .sidebar-account-link {
@@ -44,12 +52,12 @@
     margin-bottom: 2rem;
     padding: 16px 24px;
     border-radius: 40px;
-    color: #fff;
+    color: #012b36;
     text-decoration: none;
 }
 
 .sidebar-account-link:hover {
-    background-color: #186265;
+    background-color: #6c71c4;
 }
 .sidebar-account {
     display: flex;
@@ -75,7 +83,7 @@
 
 .sidebar-username {
     font-size: smaller;
-    color: #9eacad;
+    color: #063642;
 }
 
 .logout-button {

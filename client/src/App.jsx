@@ -4,6 +4,7 @@ import LoginSignupPage from "./pages/LoginSignupPage";
 import { useQuery } from "@tanstack/react-query";
 import HomePage from "./pages/HomePage";
 import Sidebar from "./components/SideBar";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
     const { data: authUser } = useQuery({
@@ -43,6 +44,12 @@ function App() {
                     path="/login"
                     element={
                         !authUser ? <LoginSignupPage /> : <Navigate to="/" />
+                    }
+                />
+                <Route
+                    path="/profile"
+                    element={
+                        authUser ? <ProfilePage /> : <Navigate to="/login" />
                     }
                 />
             </Routes>

@@ -1,0 +1,83 @@
+.post-container {
+    background-color: #eceff1;
+    padding: 20px 24px;
+    border-radius: 20px;
+    margin: 16px;
+    width: 800px;
+}
+
+.post-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.delete-button {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+}
+
+.delete-icon:hover {
+    cursor: pointer;
+    color: #dc322f;
+}
+
+.post-names {
+    display: flex;
+    gap: 5px;
+    text-decoration: none;
+    align-items: center;
+}
+
+.post-fullname {
+    font-weight: 600;
+    color: #012b36;
+}
+
+.post-username {
+    font-size: 14px;
+    color: #063642;
+}
+
+.post-timestamp {
+    font-size: 14px;
+    color: #063642;
+}
+
+.post-avatar {
+    border-radius: 50%;
+    width: 50px;
+}
+
+.post-text {
+    margin: 20px 0;
+}
+
+.post-interactions {
+    display: flex;
+    gap: 20px;
+}
+
+.like-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 1rem;
+}
+
+.like-container:hover {
+    cursor: pointer;
+    color: #d43682;
+}
+
+.comment-container:hover {
+    cursor: pointer;
+    color: #278bd2;
+}
+
+.comment-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

@@ -33,7 +33,7 @@ const Sidebar = () => {
     return (
         <div className="sidebar-container">
             <div className="sidebar-content">
-                <Link to="/" className="sidebar-link">
+                <Link to="/" className="sidebar-logo">
                     <h1>Fray</h1>
                 </Link>
                 <ul>
@@ -44,13 +44,13 @@ const Sidebar = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/" className="sidebar-link">
+                        <Link to="/profile" className="sidebar-link">
                             <FaUser size={20} />
                             <h2>Profile</h2>
                         </Link>
                     </li>
                 </ul>
-                <Link to="/" className="sidebar-account-link">
+                <Link to="/profile" className="sidebar-account-link">
                     <div className="sidebar-avatar">
                         <img src="/placeholder-avatar.png" />
                     </div>
