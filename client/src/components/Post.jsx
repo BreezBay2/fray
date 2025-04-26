@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { FaRegHeart, FaRegComment, FaTrash } from "react-icons/fa";
 import "../styles/Post.css";
 import { useQuery } from "@tanstack/react-query";
+import { formatPostDate } from "../utils/dateFormatter";
 
 const Post = ({ post }) => {
     const { data: authUser } = useQuery({ queryKey: ["authUser"] });
     const postUser = post.user;
     const isMyPost = authUser._id === post.user._id;
+    const formattedDate = formatPostDate(post.createdAt);
 
     return (
         <div className="post-container">
@@ -18,13 +20,13 @@ const Post = ({ post }) => {
                         src="/placeholder-avatar.png"
                     />
                 </Link>
-                <div>
+                <div className="post-data">
                     <Link to="/profile" className="post-names">
                         <p className="post-fullname">{postUser.fullname}</p>
                         <p>-</p>
                         <p className="post-username">@{postUser.username}</p>
                     </Link>
-                    <p className="post-timestamp">2 hours ago</p>
+                    <p className="post-timestamp">{formattedDate}</p>
                 </div>
                 {isMyPost && (
                     <div class="delete-button">
