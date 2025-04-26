@@ -3,6 +3,7 @@ import "./App.css";
 import LoginSignupPage from "./pages/LoginSignupPage";
 import { useQuery } from "@tanstack/react-query";
 import HomePage from "./pages/HomePage";
+import Sidebar from "./components/SideBar";
 
 function App() {
     const { data: authUser } = useQuery({
@@ -31,7 +32,8 @@ function App() {
     console.log(authUser);
 
     return (
-        <>
+        <div className="app">
+            {authUser && <Sidebar />}
             <Routes>
                 <Route
                     path="/"
@@ -44,7 +46,7 @@ function App() {
                     }
                 />
             </Routes>
-        </>
+        </div>
     );
 }
 
