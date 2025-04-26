@@ -1,5 +1,5 @@
 .post-container {
-    background-color: #eceff1;
+    background-color: #fff;
     padding: 20px 24px;
     border-radius: 20px;
     margin: 16px;
@@ -71,9 +71,21 @@
     gap: 5px;
 }
 
+.liked-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #d43682;
+}
+
 .like-container:hover {
     cursor: pointer;
     color: #d43682;
+}
+
+.liked-container:hover {
+    cursor: pointer;
+    color: #012b36;
 }
 
 .comment-container:hover {

@@ -1,4 +1,5 @@
 .app {
     display: flex;
     margin-inline: auto;
+    background-color: #eceff1;
 }
