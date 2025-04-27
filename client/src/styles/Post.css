@@ -1,6 +1,6 @@
 .post-container {
     background-color: #fff;
-    padding: 20px 24px;
+    padding: 24px 30px;
     border-radius: 20px;
     margin: 20px 30px;
     width: 800px;
@@ -40,6 +40,10 @@
 .post-fullname {
     font-weight: 600;
     color: #012b36;
+}
+
+.post-fullname:hover {
+    text-decoration: underline #586e75 2px;
 }
 
 .post-username {

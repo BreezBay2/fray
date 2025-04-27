@@ -47,7 +47,10 @@ const Sidebar = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/profile" className="sidebar-link">
+                            <Link
+                                to={`/profile/${authUser.username}`}
+                                className="sidebar-link"
+                            >
                                 <FaUser size={20} />
                                 <h2>Profile</h2>
                             </Link>
@@ -58,11 +61,14 @@ const Sidebar = () => {
                                 onClick={() => setPostModal(true)}
                             >
                                 <IoCreateOutline size={20} />
-                                Create a post
+                                Post
                             </button>
                         </li>
                     </ul>
-                    <Link to="/profile" className="sidebar-account-link">
+                    <Link
+                        to={`/profile/${authUser.username}`}
+                        className="sidebar-account-link"
+                    >
                         <div className="sidebar-avatar">
                             <img src="/placeholder-avatar.png" />
                         </div>

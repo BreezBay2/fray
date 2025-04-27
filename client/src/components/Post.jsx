@@ -52,14 +52,17 @@ const Post = ({ post }) => {
     return (
         <div className="post-container">
             <div className="post-user">
-                <Link to="/profile">
+                <Link to={`/profile/${postUser.username}`}>
                     <img
                         className="post-avatar"
                         src="/placeholder-avatar.png"
                     />
                 </Link>
                 <div className="post-data">
-                    <Link to="/profile" className="post-names">
+                    <Link
+                        to={`/profile/${postUser.username}`}
+                        className="post-names"
+                    >
                         <p className="post-fullname">{postUser.fullname}</p>
                         <p>-</p>
                         <p className="post-username">@{postUser.username}</p>
@@ -67,7 +70,7 @@ const Post = ({ post }) => {
                     <p className="post-timestamp">{formattedDate}</p>
                 </div>
                 {isMyPost && (
-                    <div class="delete-button">
+                    <div className="delete-button">
                         <FaTrash className="delete-icon" />
                     </div>
                 )}

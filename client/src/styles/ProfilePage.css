@@ -1,0 +1,69 @@
+.profile-page {
+    min-height: 100vh;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #fff;
+    margin: 30px;
+    margin-bottom: 40px;
+    padding: 24px 30px;
+    border-radius: 20px;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-header img {
+    width: 80px;
+    border-radius: 50%;
+}
+
+.profile-names {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.profile-fullname {
+    font-weight: 600;
+    color: #012b36;
+}
+
+.profile-username {
+    color: #063642;
+}
+
+.follow-button {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #48aef5;
+}
+
+.follow-button:hover {
+    cursor: pointer;
+    background-color: #aadcff;
+}
+
+.edit-button {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #48aef5;
+}
+
+.edit-button:hover {
+    cursor: pointer;
+    background-color: #aadcff;
+}

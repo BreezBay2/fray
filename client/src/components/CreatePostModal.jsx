@@ -20,7 +20,7 @@ const CreatePostModal = ({ closeModal }) => {
     } = useMutation({
         mutationFn: async ({ text }) => {
             try {
-                const res = await fetch("api/posts/create", {
+                const res = await fetch("/api/posts/create", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

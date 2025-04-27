@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Post from "./Post";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
-const Feed = () => {
+const Feed = ({ feedType, username }) => {
+    const getPostsEndpoint = () => {
+        switch (feedType) {
+            case "all":
+                return "/api/posts/all";
+            case "userPosts":
+                return `/api/posts/user/${username}`;
+            default:
+                return "/api/posts/all";
+        }
+    };
+
+    const POSTS_ENDPOINT = getPostsEndpoint();
+
     const {
         data: posts,
         isLoading,
@@ -12,7 +25,7 @@ const Feed = () => {
         queryKey: ["posts"],
         queryFn: async () => {
             try {
-                const res = await fetch("/api/posts/all");
+                const res = await fetch(POSTS_ENDPOINT);
                 const data = await res.json();
 
                 if (!res.ok) {
@@ -25,6 +38,10 @@ const Feed = () => {
             }
         },
     });
+
+    useEffect(() => {
+        refetch();
+    }, [username, refetch]);
 
     return (
         <>

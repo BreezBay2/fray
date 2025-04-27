@@ -9,7 +9,7 @@ const HomePage = () => {
         <div className="home-page">
             <h1>HomePage</h1>
             <p>Welcome back! {authUser.username}</p>
-            <Feed />
+            <Feed feedType={"all"} />
         </div>
     );
 };
