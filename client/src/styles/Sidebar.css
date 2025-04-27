@@ -1,4 +1,6 @@
 .sidebar-container {
+    position: sticky;
+    top: 0;
     height: 100vh;
     width: 300px;
     background-color: #fff;
@@ -22,6 +24,25 @@
     flex-direction: column;
     gap: 10px;
     margin-top: 1rem;
+}
+
+.create-button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    width: 100%;
+    border-radius: 15px;
+    background-color: #48aef5;
+    color: #012b36;
+}
+
+.create-button:hover {
+    cursor: pointer;
+    background-color: #aadcff;
 }
 
 .sidebar-link {

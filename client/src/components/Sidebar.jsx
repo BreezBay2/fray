@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/SideBar.css";
 import { Link } from "react-router-dom";
-import { IoHome, IoLogOutOutline } from "react-icons/io5";
+import { IoCreateOutline, IoHome, IoLogOutOutline } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import CreatePostModal from "./CreatePostModal";
 
 const Sidebar = () => {
+    const [postModal, setPostModal] = useState(false);
     const { data: authUser } = useQuery({ queryKey: ["authUser"] });
     const queryClient = useQueryClient();
 
@@ -31,50 +33,68 @@ const Sidebar = () => {
     });
 
     return (
-        <div className="sidebar-container">
-            <div className="sidebar-content">
-                <Link to="/" className="sidebar-logo">
-                    <h1>Fray</h1>
-                </Link>
-                <ul>
-                    <li>
-                        <Link to="/" className="sidebar-link">
-                            <IoHome size={20} />
-                            <h2>Home</h2>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/profile" className="sidebar-link">
-                            <FaUser size={20} />
-                            <h2>Profile</h2>
-                        </Link>
-                    </li>
-                </ul>
-                <Link to="/profile" className="sidebar-account-link">
-                    <div className="sidebar-avatar">
-                        <img src="/placeholder-avatar.png" />
-                    </div>
-                    <div className="sidebar-account">
-                        <div>
-                            <p className="sidebar-fullname">
-                                {authUser.fullname}
-                            </p>
-                            <p className="sidebar-username">
-                                @{authUser.username}
-                            </p>
+        <>
+            <div className="sidebar-container">
+                <div className="sidebar-content">
+                    <Link to="/" className="sidebar-logo">
+                        <h1>Fray</h1>
+                    </Link>
+                    <ul>
+                        <li>
+                            <Link to="/" className="sidebar-link">
+                                <IoHome size={20} />
+                                <h2>Home</h2>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/profile" className="sidebar-link">
+                                <FaUser size={20} />
+                                <h2>Profile</h2>
+                            </Link>
+                        </li>
+                        <li>
+                            <button
+                                className="create-button"
+                                onClick={() => setPostModal(true)}
+                            >
+                                <IoCreateOutline size={20} />
+                                Create a post
+                            </button>
+                        </li>
+                    </ul>
+                    <Link to="/profile" className="sidebar-account-link">
+                        <div className="sidebar-avatar">
+                            <img src="/placeholder-avatar.png" />
                         </div>
-                        <IoLogOutOutline
-                            className="logout-button"
-                            size={25}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                logout();
-                            }}
-                        />
-                    </div>
-                </Link>
+                        <div className="sidebar-account">
+                            <div>
+                                <p className="sidebar-fullname">
+                                    {authUser.fullname}
+                                </p>
+                                <p className="sidebar-username">
+                                    @{authUser.username}
+                                </p>
+                            </div>
+                            <IoLogOutOutline
+                                className="logout-button"
+                                size={25}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    logout();
+                                }}
+                            />
+                        </div>
+                    </Link>
+                </div>
             </div>
-        </div>
+            {postModal && (
+                <CreatePostModal
+                    closeModal={() => {
+                        setPostModal(false);
+                    }}
+                />
+            )}
+        </>
     );
 };
 
