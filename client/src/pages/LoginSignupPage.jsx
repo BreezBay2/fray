@@ -152,26 +152,28 @@ const LoginSignupPage = () => {
                     <form onSubmit={handleSignUpSubmit}>
                         <h1>Sign Up</h1>
                         <input
-                            type="text"
-                            placeholder="Username"
-                            name="username"
-                            value={signUpFormData.username}
-                            onChange={handleSignUpInputChange}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Full Name"
-                            name="fullname"
-                            value={signUpFormData.fullname}
-                            onChange={handleSignUpInputChange}
-                        />
-                        <input
                             type="email"
                             placeholder="E-Mail"
                             name="email"
                             value={signUpFormData.email}
                             onChange={handleSignUpInputChange}
                         />
+                        <div className="sign-up-names">
+                            <input
+                                type="text"
+                                placeholder="Username"
+                                name="username"
+                                value={signUpFormData.username}
+                                onChange={handleSignUpInputChange}
+                            />
+                            <input
+                                type="text"
+                                placeholder="Full Name"
+                                name="fullname"
+                                value={signUpFormData.fullname}
+                                onChange={handleSignUpInputChange}
+                            />
+                        </div>
                         <input
                             type="password"
                             placeholder="Password"
