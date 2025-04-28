@@ -24,8 +24,7 @@
 
 .home-foryou:hover {
     cursor: pointer;
-    background-color: #48aef5;
-    color: #fff;
+    box-shadow: 0px 0px 0px 2px inset #48aef5;
 }
 
 .home-foryou-active {
@@ -53,8 +52,7 @@
 
 .home-following:hover {
     cursor: pointer;
-    background-color: #48aef5;
-    color: #fff;
+    box-shadow: 0px 0px 0px 2px inset #48aef5;
 }
 
 .home-following-active {

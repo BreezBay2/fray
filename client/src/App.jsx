@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import HomePage from "./pages/HomePage";
 import Sidebar from "./components/SideBar";
 import ProfilePage from "./pages/ProfilePage";
+import FeatureBar from "./components/FeatureBar";
 
 function App() {
     const { data: authUser, isLoading } = useQuery({
@@ -57,6 +58,7 @@ function App() {
                     }
                 />
             </Routes>
+            {authUser && <FeatureBar />}
         </div>
     );
 }

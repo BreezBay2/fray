@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/SideBar.css";
+import "../styles/components/SideBar.css";
 import { Link } from "react-router-dom";
 import { IoCreateOutline, IoHome, IoLogOutOutline } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";

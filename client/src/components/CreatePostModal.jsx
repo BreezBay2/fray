@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "../styles/CreatePostModal.css";
+import "../styles/components/CreatePostModal.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FaRegImage } from "react-icons/fa6";
 import { MdCancel } from "react-icons/md";

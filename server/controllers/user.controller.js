@@ -131,3 +131,31 @@ export const updateUser = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+export const getSuggestedUsers = async (req, res) => {
+    try {
+        const currentUser = req.user._id;
+
+        const usersFollowed = await User.findById(currentUser).select(
+            "following"
+        );
+
+        const users = await User.aggregate([
+            { $match: { _id: { $ne: currentUser } } },
+            { $sample: { size: 10 } },
+        ]);
+
+        const filteredUsers = users.filter(
+            (user) => !usersFollowed.following.includes(user._id)
+        );
+
+        const suggestedUsers = filteredUsers.slice(0, 5);
+
+        suggestedUsers.forEach((user) => (user.password = null));
+
+        res.status(200).json(suggestedUsers);
+    } catch (error) {
+        console.log("Error in Get Suggested Users Controller. ", error.message);
+        res.status(500).json({ error: error.message });
+    }
+};

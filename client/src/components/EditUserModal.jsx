@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "../styles/EditUserModal.css";
+import "../styles/components/EditUserModal.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const EditUserModal = ({ authUser, closeModal }) => {

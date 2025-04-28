@@ -2,7 +2,8 @@
     position: sticky;
     top: 0;
     height: 100vh;
-    width: 300px;
+    width: 20%;
+    min-width: 300px;
     background-color: #fff;
     display: flex;
     justify-content: center;
@@ -14,7 +15,9 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 90%;
+    max-width: 270px;
     margin-top: 1rem;
 }
 
@@ -23,7 +26,7 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     margin-top: 1rem;
 }
 
@@ -65,17 +68,17 @@
 }
 
 .sidebar-link:hover {
-    background-color: #48aef5;
+    box-shadow: 0px 0px 0px 2px inset #48aef5;
 }
 
 .sidebar-account-link {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.5rem;
     margin-top: auto;
     margin-bottom: 2rem;
     padding: 16px 24px;
-    border-radius: 40px;
+    border-radius: 50px;
     color: #012b36;
     text-decoration: none;
 }
@@ -86,12 +89,13 @@
 .sidebar-account {
     display: flex;
     justify-content: space-between;
-    flex: 1;
+    gap: 1rem;
 }
 
 .sidebar-avatar {
     align-self: center;
     width: 40px;
+    height: 40px;
 }
 
 .sidebar-avatar img {

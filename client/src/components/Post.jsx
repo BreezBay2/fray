@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaRegHeart, FaRegComment, FaTrash } from "react-icons/fa";
-import "../styles/Post.css";
+import "../styles/components/Post.css";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { formatPostDate } from "../utils/dateFormatter";
 

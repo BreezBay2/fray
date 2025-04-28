@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Post from "./Post";
-import "../styles/Feed.css";
+import "../styles/components/Feed.css";
 import { useQuery } from "@tanstack/react-query";
 
 const Feed = ({ feedType, username, userId }) => {
