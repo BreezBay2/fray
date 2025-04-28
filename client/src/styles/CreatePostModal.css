@@ -43,6 +43,8 @@
 }
 
 .modal-center img {
+    object-fit: cover;
+    aspect-ratio: 1;
     height: 50px;
     border-radius: 50%;
 }

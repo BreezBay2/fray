@@ -91,13 +91,14 @@
 
 .sidebar-avatar {
     align-self: center;
-    width: 32px;
+    width: 40px;
 }
 
 .sidebar-avatar img {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    aspect-ratio: 1;
     border-radius: 50%;
 }
 

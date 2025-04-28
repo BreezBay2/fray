@@ -63,6 +63,8 @@
 .post-avatar {
     border-radius: 50%;
     width: 50px;
+    object-fit: cover;
+    aspect-ratio: 1;
 }
 
 .post-content {

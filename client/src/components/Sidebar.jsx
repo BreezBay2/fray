@@ -70,7 +70,12 @@ const Sidebar = () => {
                         className="sidebar-account-link"
                     >
                         <div className="sidebar-avatar">
-                            <img src="/placeholder-avatar.png" />
+                            <img
+                                src={
+                                    authUser.profileImg ||
+                                    "/placeholder-avatar.png"
+                                }
+                            />
                         </div>
                         <div className="sidebar-account">
                             <div>

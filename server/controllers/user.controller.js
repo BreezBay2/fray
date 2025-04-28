@@ -1,4 +1,6 @@
 import User from "../models/user.model.js";
+import bcrypt from "bcryptjs";
+import { v2 as cloudinary } from "cloudinary";
 
 export const getUserProfile = async (req, res) => {
     const { username } = req.params;
@@ -56,5 +58,76 @@ export const followUnfollowUser = async (req, res) => {
     } catch (error) {
         console.log("Error in FollowUnfollow Controller.", error);
         res.status(500).json({ error: "Internal Server Error." });
+    }
+};
+
+export const updateUser = async (req, res) => {
+    let { fullname, bio, link, currentPassword, newPassword, profileImg } =
+        req.body;
+
+    const currentUser = req.user._id;
+
+    try {
+        let user = await User.findById(currentUser);
+        if (!user) {
+            return res.status(404).json({ message: "User not found." });
+        }
+
+        if (
+            (!currentPassword && newPassword) ||
+            (currentPassword && !newPassword)
+        ) {
+            return res.status(400).json({
+                error: "Please provide both the current password and the new password.",
+            });
+        }
+
+        if (currentPassword && newPassword) {
+            const passwordConfirmation = await bcrypt.compare(
+                currentPassword,
+                user.password
+            );
+
+            if (!passwordConfirmation)
+                return res
+                    .status(400)
+                    .json({ error: "Current password is incorrect." });
+
+            if (newPassword < 6) {
+                return res.status(400).json({
+                    error: "New password must be at least 6 characters long.",
+                });
+            }
+
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(newPassword, salt);
+        }
+
+        if (profileImg) {
+            if (user.profileImg) {
+                await cloudinary.uploader.destroy(
+                    user.profileImg.split("/").pop().split(".")[0]
+                );
+            }
+
+            const uploadedResponse = await cloudinary.uploader.upload(
+                profileImg
+            );
+            profileImg = uploadedResponse.secure_url;
+        }
+
+        user.fullname = fullname || user.fullname;
+        user.bio = bio || user.bio;
+        user.link = link || user.link;
+        user.profileImg = profileImg || user.profileImg;
+
+        user = await user.save();
+
+        user.password = null;
+
+        return res.status(200).json(user);
+    } catch (error) {
+        console.log("Error in Update User Controller. ", error.message);
+        res.status(500).json({ error: error.message });
     }
 };

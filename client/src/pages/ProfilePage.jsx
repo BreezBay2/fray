@@ -78,7 +78,12 @@ const ProfilePage = () => {
                                     @{user.username}
                                 </p>
                             </div>
-                            <img src="/placeholder-avatar.png" />
+                            <img
+                                src={
+                                    user?.profileImg ||
+                                    "/placeholder-avatar.png"
+                                }
+                            />
                         </div>
                         <p>{user.bio}</p>
                         <div className="profile-stats">

@@ -21,6 +21,8 @@
 }
 
 .profile-header img {
+    object-fit: cover;
+    aspect-ratio: 1;
     width: 80px;
     border-radius: 50%;
 }

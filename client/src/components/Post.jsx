@@ -55,7 +55,7 @@ const Post = ({ post }) => {
                 <Link to={`/profile/${postUser.username}`}>
                     <img
                         className="post-avatar"
-                        src="/placeholder-avatar.png"
+                        src={postUser.profileImg || "/placeholder-avatar.png"}
                     />
                 </Link>
                 <div className="post-data">

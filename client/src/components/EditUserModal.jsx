@@ -1,14 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/EditUserModal.css";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const EditUserModal = ({ authUser, closeModal }) => {
-    const [profileImg, setProfileImg] = useState(null);
+    const queryClient = useQueryClient();
+    // const [profileImg, setProfileImg] = useState(null);
     const [formData, setFormData] = useState({
         fullname: "",
         bio: "",
         link: "",
         currentPassword: "",
         newPassword: "",
+        profileImg: null,
     });
 
     const profileImgRef = useRef(null);
@@ -25,16 +28,66 @@ const EditUserModal = ({ authUser, closeModal }) => {
                 link: authUser.link,
                 currentPassword: "",
                 newPassword: "",
+                profileImg: authUser.profileImg,
             });
         }
     }, [authUser]);
+
+    const { mutate: updateProfile, isPending } = useMutation({
+        mutationFn: async ({
+            fullname,
+            bio,
+            link,
+            currentPassword,
+            newPassword,
+            profileImg,
+        }) => {
+            try {
+                console.log(formData);
+                const res = await fetch("/api/user/update", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        fullname,
+                        bio,
+                        link,
+                        currentPassword,
+                        newPassword,
+                        profileImg,
+                    }),
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.error || "Something went wrong.");
+                }
+
+                return data;
+            } catch (error) {
+                throw new Error(error.message);
+            }
+        },
+        onSuccess: () => {
+            Promise.all([
+                queryClient.invalidateQueries({ queryKey: ["authUser"] }),
+                queryClient.invalidateQueries({ queryKey: ["userProfile"] }),
+                queryClient.invalidateQueries({ queryKey: ["posts"] }),
+            ]);
+        },
+    });
 
     const handleImgChange = (e) => {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = () => {
-                setProfileImg(reader.result);
+                // setProfileImg(reader.result);
+                setFormData({
+                    ...formData,
+                    [e.target.name]: reader.result,
+                });
+                console.log(formData);
             };
             reader.readAsDataURL(file);
         }
@@ -50,15 +103,27 @@ const EditUserModal = ({ authUser, closeModal }) => {
             }}
         >
             <div className="edit-modal">
-                <form className="edit-form">
+                <form
+                    className="edit-form"
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        updateProfile(formData);
+                        closeModal();
+                    }}
+                >
                     <div className="edit-name">
                         <img
-                            src={profileImg || "/placeholder-avatar.png"}
+                            src={
+                                formData.profileImg ||
+                                authUser.profileImg ||
+                                "/placeholder-avatar.png"
+                            }
                             onClick={() => profileImgRef.current.click()}
                         />
                         <input
                             type="file"
                             ref={profileImgRef}
+                            name="profileImg"
                             hidden
                             onChange={(e) => handleImgChange(e)}
                         />
