@@ -42,6 +42,33 @@ const Post = ({ post }) => {
         },
     });
 
+    const { mutate: deletePost, isPending: isDeleting } = useMutation({
+        mutationFn: async () => {
+            try {
+                const res = await fetch(`/api/posts/${post._id}`, {
+                    method: "DELETE",
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.error || "Something went wrong.");
+                }
+
+                return data;
+            } catch (error) {
+                throw new Error(error);
+            }
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["posts"] });
+        },
+    });
+
+    const handleDeletePost = () => {
+        deletePost();
+    };
+
     const handleLikePost = () => {
         if (isLiking) {
             return;
@@ -71,7 +98,12 @@ const Post = ({ post }) => {
                 </div>
                 {isMyPost && (
                     <div className="delete-button">
-                        <FaTrash className="delete-icon" />
+                        {!isDeleting && (
+                            <FaTrash
+                                className="delete-icon"
+                                onClick={handleDeletePost}
+                            />
+                        )}
                     </div>
                 )}
             </div>
