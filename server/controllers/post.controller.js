@@ -1,10 +1,11 @@
 import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
+import { v2 as cloudinary } from "cloudinary";
 
 export const createPost = async (req, res) => {
     try {
         const { text } = req.body;
-        const { img } = req.body;
+        let { img } = req.body;
         const userId = req.user._id.toString();
 
         const user = await User.findById(userId);
@@ -16,6 +17,11 @@ export const createPost = async (req, res) => {
             return res
                 .status(400)
                 .json({ error: "Post must either have a text or an image." });
+        }
+
+        if (img) {
+            const uploadedResponse = await cloudinary.uploader.upload(img);
+            img = uploadedResponse.secure_url;
         }
 
         const newPost = new Post({
@@ -192,7 +198,9 @@ export const getLikedPosts = async (req, res) => {
 
         const likedPosts = await Post.find({
             _id: { $in: user.likedPosts },
-        }).populate({ path: "user", select: "-password" });
+        })
+            .sort({ createdAt: -1 })
+            .populate({ path: "user", select: "-password" });
 
         res.status(200).json(likedPosts);
     } catch (error) {

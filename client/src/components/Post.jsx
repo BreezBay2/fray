@@ -75,8 +75,9 @@ const Post = ({ post }) => {
                     </div>
                 )}
             </div>
-            <div className="post-text">
+            <div className="post-content">
                 <p>{post.text}</p>
+                {post.img && <img src={post.img} />}
             </div>
             <div className="post-interactions">
                 <div

@@ -1,10 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/CreatePostModal.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { FaRegImage } from "react-icons/fa6";
+import { MdCancel } from "react-icons/md";
 
 const CreatePostModal = ({ closeModal }) => {
     const [text, setText] = useState("");
+    const [img, setImg] = useState(null);
     const textAreaRef = useRef();
+    const imgRef = useRef(null);
 
     const queryClient = useQueryClient();
 
@@ -18,14 +22,14 @@ const CreatePostModal = ({ closeModal }) => {
         isError,
         error,
     } = useMutation({
-        mutationFn: async ({ text }) => {
+        mutationFn: async ({ text, img }) => {
             try {
                 const res = await fetch("/api/posts/create", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ text }),
+                    body: JSON.stringify({ text, img }),
                 });
                 const data = res.json();
 
@@ -44,9 +48,20 @@ const CreatePostModal = ({ closeModal }) => {
         },
     });
 
+    const handleImgChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                setImg(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        createPost({ text });
+        createPost({ text, img });
     };
 
     return (
@@ -72,15 +87,38 @@ const CreatePostModal = ({ closeModal }) => {
                 </div>
                 <div className="modal-center">
                     <img src="/placeholder-avatar.png" />
-                    <form>
-                        <textarea
-                            ref={textAreaRef}
-                            placeholder="What's on your mind?"
-                            value={text}
-                            onChange={(e) => setText(e.target.value)}
-                        />
-                    </form>
+                    <textarea
+                        ref={textAreaRef}
+                        placeholder="What's on your mind?"
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
+                    />
                 </div>
+                {img && (
+                    <div className="create-image-container">
+                        <MdCancel
+                            className="create-image-cancel"
+                            onClick={() => {
+                                setImg(null);
+                                imgRef.current.value = null;
+                            }}
+                        />
+                        <img src={img} />
+                    </div>
+                )}
+                <FaRegImage
+                    className="create-image-button"
+                    size={23}
+                    onClick={() => imgRef.current.click()}
+                />
+                <input
+                    type="file"
+                    accept="image/*"
+                    hidden
+                    ref={imgRef}
+                    onChange={handleImgChange}
+                />
+                {isError && <div>{error.message}</div>}
             </div>
         </div>
     );
