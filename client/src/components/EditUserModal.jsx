@@ -28,7 +28,6 @@ const EditUserModal = ({ authUser, closeModal }) => {
                 link: authUser.link,
                 currentPassword: "",
                 newPassword: "",
-                profileImg: authUser.profileImg,
             });
         }
     }, [authUser]);

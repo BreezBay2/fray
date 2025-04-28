@@ -7,7 +7,7 @@ import Sidebar from "./components/SideBar";
 import ProfilePage from "./pages/ProfilePage";
 
 function App() {
-    const { data: authUser } = useQuery({
+    const { data: authUser, isLoading } = useQuery({
         queryKey: ["authUser"],
         queryFn: async () => {
             try {
@@ -31,6 +31,10 @@ function App() {
     });
 
     console.log(authUser);
+
+    if (isLoading) {
+        return <h1>Loading...</h1>;
+    }
 
     return (
         <div className="app">
