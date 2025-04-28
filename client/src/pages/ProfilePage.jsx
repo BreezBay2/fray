@@ -78,7 +78,10 @@ const ProfilePage = () => {
                             <img src="/placeholder-avatar.png" />
                         </div>
                         <p>{user.bio}</p>
-                        <p>{user.followers.length} Followers</p>
+                        <div className="profile-stats">
+                            <p>{user.followers.length} Followers</p>
+                            <p>{user.link}</p>
+                        </div>
                         {isMyProfile ? (
                             <button className="edit-button">
                                 Edit Profile

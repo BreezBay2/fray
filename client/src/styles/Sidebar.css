@@ -37,13 +37,13 @@
     border: none;
     width: 100%;
     border-radius: 15px;
-    background-color: #48aef5;
-    color: #012b36;
+    background-color: #278bd2;
+    color: #fff;
 }
 
 .create-button:hover {
     cursor: pointer;
-    background-color: #aadcff;
+    background-color: #48aef5;
 }
 
 .sidebar-link {
@@ -65,7 +65,7 @@
 }
 
 .sidebar-link:hover {
-    background-color: #aadcff;
+    background-color: #48aef5;
 }
 
 .sidebar-account-link {
@@ -81,7 +81,7 @@
 }
 
 .sidebar-account-link:hover {
-    background-color: #aadcff;
+    background-color: #48aef5;
 }
 .sidebar-account {
     display: flex;

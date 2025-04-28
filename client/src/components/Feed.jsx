@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Post from "./Post";
+import "../styles/Feed.css";
 import { useQuery } from "@tanstack/react-query";
 
 const Feed = ({ feedType, username }) => {
@@ -9,6 +10,8 @@ const Feed = ({ feedType, username }) => {
                 return "/api/posts/all";
             case "userPosts":
                 return `/api/posts/user/${username}`;
+            case "following":
+                return "/api/posts/following";
             default:
                 return "/api/posts/all";
         }
@@ -41,12 +44,12 @@ const Feed = ({ feedType, username }) => {
 
     useEffect(() => {
         refetch();
-    }, [username, refetch]);
+    }, [username, refetch, feedType]);
 
     return (
         <>
             {!isLoading && !isRefetching && posts && (
-                <div>
+                <div className="feed">
                     {posts.map((post) => (
                         <Post key={post._id} post={post} />
                     ))}

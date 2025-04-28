@@ -1,15 +1,35 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import Feed from "../components/Feed";
 import "../styles/HomePage.css";
 
 const HomePage = () => {
-    const { data: authUser } = useQuery({ queryKey: ["authUser"] });
+    const [feedType, setFeedType] = useState("all");
     return (
         <div className="home-page">
-            <h1>HomePage</h1>
-            <p>Welcome back! {authUser.username}</p>
-            <Feed feedType={"all"} />
+            <div className="home-feeds">
+                <div
+                    className={
+                        feedType === "all"
+                            ? "home-foryou-active"
+                            : "home-foryou"
+                    }
+                    onClick={() => setFeedType("all")}
+                >
+                    For You
+                </div>
+                <div
+                    className={
+                        feedType === "following"
+                            ? " home-following-active"
+                            : "home-following"
+                    }
+                    onClick={() => setFeedType("following")}
+                >
+                    Following
+                </div>
+            </div>
+            <Feed feedType={feedType} />
         </div>
     );
 };

@@ -1,5 +1,7 @@
 .profile-page {
     min-height: 100vh;
+    width: 60%;
+    max-width: 1000px;
 }
 
 .profile-container {
@@ -45,12 +47,13 @@
     border: none;
     font-size: 16px;
     font-weight: 500;
-    background-color: #48aef5;
+    background-color: #278bd2;
+    color: #fff;
 }
 
 .follow-button:hover {
     cursor: pointer;
-    background-color: #aadcff;
+    background-color: #48aef5;
 }
 
 .edit-button {
@@ -60,10 +63,11 @@
     border: none;
     font-size: 16px;
     font-weight: 500;
-    background-color: #48aef5;
+    background-color: #278bd2;
+    color: #fff;
 }
 
 .edit-button:hover {
     cursor: pointer;
-    background-color: #aadcff;
+    background-color: #48aef5;
 }

@@ -5,6 +5,7 @@ import {
     createPost,
     deletePost,
     getAllPosts,
+    getFollowingPosts,
     getUserPosts,
     likeUnlikePost,
 } from "../controllers/post.controller.js";
@@ -19,5 +20,6 @@ router.delete("/:id", protectRoute, deletePost);
 
 router.get("/all", protectRoute, getAllPosts);
 router.get("/user/:username", protectRoute, getUserPosts);
+router.get("/following", protectRoute, getFollowingPosts);
 
 export default router;

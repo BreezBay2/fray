@@ -1,3 +1,70 @@
 .home-page {
     min-height: 100vh;
+    width: 60%;
+    max-width: 1000px;
+}
+
+.home-feeds {
+    display: flex;
+    width: 100%;
+    padding: 20px 30px;
+    justify-content: space-between;
+}
+
+.home-foryou {
+    display: flex;
+    justify-content: center;
+    width: 49%;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.home-foryou:hover {
+    cursor: pointer;
+    background-color: #48aef5;
+    color: #fff;
+}
+
+.home-foryou-active {
+    display: flex;
+    justify-content: center;
+    width: 49%;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #278bd2;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.home-following {
+    display: flex;
+    justify-content: center;
+    width: 49%;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.home-following:hover {
+    cursor: pointer;
+    background-color: #48aef5;
+    color: #fff;
+}
+
+.home-following-active {
+    display: flex;
+    justify-content: center;
+    width: 49%;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #278bd2;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
 }
