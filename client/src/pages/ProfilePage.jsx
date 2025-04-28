@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/ProfilePage.css";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Feed from "../components/Feed";
 import { useParams } from "react-router-dom";
 
 const ProfilePage = () => {
+    const [feedType, setFeedType] = useState("userPosts");
     const { username } = useParams();
     const { data: authUser } = useQuery({ queryKey: ["authUser"] });
     const queryClient = useQueryClient();
@@ -99,7 +100,34 @@ const ProfilePage = () => {
                     </div>
                 )}
 
-                <Feed feedType={"userPosts"} username={username} />
+                <div className="profile-feeds">
+                    <div
+                        className={
+                            feedType === "userPosts"
+                                ? "profile-posts-active"
+                                : "profile-posts"
+                        }
+                        onClick={() => setFeedType("userPosts")}
+                    >
+                        Posts
+                    </div>
+                    <div
+                        className={
+                            feedType === "likes"
+                                ? "profile-likes-active"
+                                : "profile-likes"
+                        }
+                        onClick={() => setFeedType("likes")}
+                    >
+                        Likes
+                    </div>
+                </div>
+
+                <Feed
+                    feedType={feedType}
+                    username={username}
+                    userId={user?._id}
+                />
             </div>
         </>
     );

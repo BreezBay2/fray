@@ -3,7 +3,7 @@ import Post from "./Post";
 import "../styles/Feed.css";
 import { useQuery } from "@tanstack/react-query";
 
-const Feed = ({ feedType, username }) => {
+const Feed = ({ feedType, username, userId }) => {
     const getPostsEndpoint = () => {
         switch (feedType) {
             case "all":
@@ -12,6 +12,8 @@ const Feed = ({ feedType, username }) => {
                 return `/api/posts/user/${username}`;
             case "following":
                 return "/api/posts/following";
+            case "likes":
+                return `/api/posts/likes/${userId}`;
             default:
                 return "/api/posts/all";
         }

@@ -71,3 +71,68 @@
     cursor: pointer;
     background-color: #48aef5;
 }
+
+.profile-feeds {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px 30px;
+}
+
+.profile-posts {
+    display: flex;
+    justify-content: center;
+    width: 49%;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.profile-posts:hover {
+    cursor: pointer;
+    background-color: #48aef5;
+    color: #fff;
+}
+
+.profile-posts-active {
+    display: flex;
+    justify-content: center;
+    width: 49%;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #278bd2;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.profile-likes {
+    display: flex;
+    justify-content: center;
+    width: 49%;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.profile-likes:hover {
+    cursor: pointer;
+    background-color: #48aef5;
+    color: #fff;
+}
+
+.profile-likes-active {
+    display: flex;
+    justify-content: center;
+    width: 49%;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #278bd2;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
