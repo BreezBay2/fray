@@ -3,9 +3,11 @@ import "../styles/ProfilePage.css";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Feed from "../components/Feed";
 import { useParams } from "react-router-dom";
+import EditUserModal from "../components/EditUserModal";
 
 const ProfilePage = () => {
     const [feedType, setFeedType] = useState("userPosts");
+    const [editModal, setEditModal] = useState(false);
     const { username } = useParams();
     const { data: authUser } = useQuery({ queryKey: ["authUser"] });
     const queryClient = useQueryClient();
@@ -84,7 +86,10 @@ const ProfilePage = () => {
                             <p>{user.link}</p>
                         </div>
                         {isMyProfile ? (
-                            <button className="edit-button">
+                            <button
+                                className="edit-button"
+                                onClick={() => setEditModal(true)}
+                            >
                                 Edit Profile
                             </button>
                         ) : (
@@ -129,6 +134,14 @@ const ProfilePage = () => {
                     userId={user?._id}
                 />
             </div>
+            {editModal && (
+                <EditUserModal
+                    authUser={authUser}
+                    closeModal={() => {
+                        setEditModal(false);
+                    }}
+                />
+            )}
         </>
     );
 };
