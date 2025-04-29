@@ -133,7 +133,8 @@ export const getAllPosts = async (req, res) => {
     try {
         const posts = await Post.find()
             .sort({ createdAt: -1 })
-            .populate({ path: "user", select: "-password" });
+            .populate({ path: "user", select: "-password" })
+            .populate({ path: "comments.user", select: "-password" });
 
         if (posts.length === 0) {
             return res.status(200).json([]);
@@ -158,7 +159,8 @@ export const getFollowingPosts = async (req, res) => {
 
         const followingPosts = await Post.find({ user: { $in: following } })
             .sort({ createdAt: -1 })
-            .populate({ path: "user", select: "-password" });
+            .populate({ path: "user", select: "-password" })
+            .populate({ path: "comments.user", select: "-password" });
 
         res.status(200).json(followingPosts);
     } catch (error) {
@@ -178,7 +180,8 @@ export const getUserPosts = async (req, res) => {
 
         const posts = await Post.find({ user: user._id })
             .sort({ createdAt: -1 })
-            .populate({ path: "user", select: "-password" });
+            .populate({ path: "user", select: "-password" })
+            .populate({ path: "comments.user", select: "-password" });
 
         res.status(200).json(posts);
     } catch (error) {
@@ -200,7 +203,8 @@ export const getLikedPosts = async (req, res) => {
             _id: { $in: user.likedPosts },
         })
             .sort({ createdAt: -1 })
-            .populate({ path: "user", select: "-password" });
+            .populate({ path: "user", select: "-password" })
+            .populate({ path: "comments.user", select: "-password" });
 
         res.status(200).json(likedPosts);
     } catch (error) {

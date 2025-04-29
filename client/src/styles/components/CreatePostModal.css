@@ -5,8 +5,9 @@
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     z-index: 1;
+    padding-top: 10%;
 }
 
 .create-modal {
@@ -42,7 +43,6 @@
     flex-direction: row;
     gap: 12px;
     padding: 0 20px;
-    height: 50%;
 }
 
 .modal-center img {

@@ -64,6 +64,14 @@ const ProfilePage = () => {
         refetch();
     }, [username, refetch]);
 
+    useEffect(() => {
+        if (editModal === true) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "scroll";
+        }
+    }, [editModal]);
+
     return (
         <>
             <div className="profile-page">

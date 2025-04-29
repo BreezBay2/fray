@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/components/SideBar.css";
 import { Link } from "react-router-dom";
 import { IoCreateOutline, IoHome, IoLogOutOutline } from "react-icons/io5";
@@ -31,6 +31,14 @@ const Sidebar = () => {
             queryClient.invalidateQueries({ queryKey: ["authUser"] });
         },
     });
+
+    useEffect(() => {
+        if (postModal === true) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "scroll";
+        }
+    }, [postModal]);
 
     return (
         <>
