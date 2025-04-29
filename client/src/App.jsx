@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import Sidebar from "./components/SideBar";
 import ProfilePage from "./pages/ProfilePage";
 import FeatureBar from "./components/FeatureBar";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
     const { data: authUser, isLoading } = useQuery({
@@ -55,6 +56,12 @@ function App() {
                     path="/profile/:username"
                     element={
                         authUser ? <ProfilePage /> : <Navigate to="/login" />
+                    }
+                />
+                <Route
+                    path="*"
+                    element={
+                        authUser ? <NotFoundPage /> : <Navigate to="/login" />
                     }
                 />
             </Routes>
