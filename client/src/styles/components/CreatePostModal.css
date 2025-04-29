@@ -6,12 +6,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
 
 .create-modal {
     width: 40%;
+    max-width: 600px;
     background-color: white;
     border-radius: 10px;
+    padding: 5px 5px;
 }
 
 .create-modal-buttons {
@@ -37,7 +40,7 @@
 .modal-center {
     display: flex;
     flex-direction: row;
-    gap: 8px;
+    gap: 12px;
     padding: 0 20px;
     height: 50%;
 }
@@ -45,7 +48,7 @@
 .modal-center img {
     object-fit: cover;
     aspect-ratio: 1;
-    height: 50px;
+    height: 60px;
     border-radius: 50%;
 }
 
@@ -87,4 +90,8 @@
     color: #1a6497;
     cursor: pointer;
     margin: 10px 20px 15px;
+}
+
+.create-image-button:hover {
+    color: #48aef5;
 }

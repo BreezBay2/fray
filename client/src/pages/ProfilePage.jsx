@@ -87,8 +87,19 @@ const ProfilePage = () => {
                         </div>
                         <p>{user.bio}</p>
                         <div className="profile-stats">
-                            <p>{user.followers.length} Followers</p>
-                            <p>{user.link}</p>
+                            <p className="profile-followers">
+                                {user.followers.length} Followers
+                            </p>
+                            {user.link && <span>•</span>}
+                            {user.link && (
+                                <a
+                                    href={user.link}
+                                    target="_blank"
+                                    className="profile-link"
+                                >
+                                    {user.link}
+                                </a>
+                            )}
                         </div>
                         {isMyProfile ? (
                             <button

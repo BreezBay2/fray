@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/components/CreatePostModal.css";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { FaRegImage } from "react-icons/fa6";
 import { MdCancel } from "react-icons/md";
 
@@ -9,6 +9,7 @@ const CreatePostModal = ({ closeModal }) => {
     const [img, setImg] = useState(null);
     const textAreaRef = useRef();
     const imgRef = useRef(null);
+    const { data: authUser } = useQuery({ queryKey: ["authUser"] });
 
     const queryClient = useQueryClient();
 
@@ -86,7 +87,9 @@ const CreatePostModal = ({ closeModal }) => {
                     </button>
                 </div>
                 <div className="modal-center">
-                    <img src="/placeholder-avatar.png" />
+                    <img
+                        src={authUser.profileImg || "/placeholder-avatar.png"}
+                    />
                     <textarea
                         ref={textAreaRef}
                         placeholder="What's on your mind?"
