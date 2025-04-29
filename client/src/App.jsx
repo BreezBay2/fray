@@ -32,8 +32,6 @@ function App() {
         retry: false,
     });
 
-    console.log(authUser);
-
     if (isLoading) {
         return <h1>Loading...</h1>;
     }

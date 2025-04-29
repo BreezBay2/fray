@@ -30,6 +30,7 @@ const FeatureBar = () => {
                 {!isLoading &&
                     suggestedUsers.map((user) => (
                         <Link
+                            key={user._id}
                             to={`/profile/${user.username}`}
                             className="featured-user"
                         >

@@ -47,7 +47,6 @@ const EditUserModal = ({ authUser, closeModal }) => {
             profileImg,
         }) => {
             try {
-                console.log(formData);
                 const res = await fetch("/api/user/update", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -92,7 +91,6 @@ const EditUserModal = ({ authUser, closeModal }) => {
                     ...formData,
                     [e.target.name]: reader.result,
                 });
-                console.log(formData);
             };
             reader.readAsDataURL(file);
         }
