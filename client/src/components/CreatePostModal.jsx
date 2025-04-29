@@ -32,7 +32,7 @@ const CreatePostModal = ({ closeModal }) => {
                     },
                     body: JSON.stringify({ text, img }),
                 });
-                const data = res.json();
+                const data = await res.json();
 
                 if (!res.ok) {
                     throw new Error(data.error || "Something went wrong.");
@@ -121,7 +121,9 @@ const CreatePostModal = ({ closeModal }) => {
                     ref={imgRef}
                     onChange={handleImgChange}
                 />
-                {isError && <div>{error.message}</div>}
+                {isError && (
+                    <div className="error-message">{error.message}</div>
+                )}
             </div>
         </div>
     );

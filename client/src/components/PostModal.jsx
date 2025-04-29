@@ -16,7 +16,12 @@ const PostModal = ({ post, closeModal }) => {
         textAreaRef.current.focus();
     });
 
-    const { mutate: commentPost, isPending } = useMutation({
+    const {
+        mutate: commentPost,
+        isPending,
+        isError,
+        error,
+    } = useMutation({
         mutationFn: async () => {
             try {
                 const res = await fetch(`/api/posts/comment/${post._id}`, {
@@ -25,7 +30,7 @@ const PostModal = ({ post, closeModal }) => {
                     body: JSON.stringify({ text: comment }),
                 });
 
-                const data = res.json();
+                const data = await res.json();
 
                 if (!res.ok) {
                     throw new Error(data.error || "Something went wrong.");
@@ -101,6 +106,9 @@ const PostModal = ({ post, closeModal }) => {
                 <button className="comment-button" onClick={handleComment}>
                     {isPending ? "Commenting..." : "Comment"}
                 </button>
+                {isError && (
+                    <div className="error-message">{error.message}</div>
+                )}
                 {post.comments.length !== 0 && (
                     <div className="comment-divider" />
                 )}

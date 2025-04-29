@@ -22,7 +22,7 @@ const ProfilePage = () => {
         queryFn: async () => {
             try {
                 const res = await fetch(`/api/user/profile/${username}`);
-                const data = res.json();
+                const data = await res.json();
 
                 if (!res.ok) {
                     throw new Error(data.error || "Something went wrong");

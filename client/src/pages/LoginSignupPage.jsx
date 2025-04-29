@@ -138,7 +138,11 @@ const LoginSignupPage = () => {
                             onChange={handleLoginInputChange}
                         />
                         <button>{loginPending ? "Loading..." : "Login"}</button>
-                        {loginErrorFound && <p>{loginError.message}</p>}
+                        {loginErrorFound && (
+                            <p className="error-message">
+                                {loginError.message}
+                            </p>
+                        )}
                         <div className="sign-up-link">
                             <p>
                                 Don't have an account?{" "}
@@ -191,7 +195,11 @@ const LoginSignupPage = () => {
                         <button>
                             {signupPending ? "Loading..." : "Sign Up"}
                         </button>
-                        {signupErrorFound && <p>{signupError.message}</p>}
+                        {signupErrorFound && (
+                            <p className="error-message">
+                                {signupError.message}
+                            </p>
+                        )}
                         <div className="sign-up-link">
                             <p>
                                 Already have an account?{" "}

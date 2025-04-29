@@ -3,3 +3,10 @@
     margin-inline: auto;
     background-color: #eceff1;
 }
+
+.error-message {
+    display: flex;
+    justify-content: center;
+    color: #dc322f;
+    padding-bottom: 20px;
+}

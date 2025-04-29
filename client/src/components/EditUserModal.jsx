@@ -32,7 +32,12 @@ const EditUserModal = ({ authUser, closeModal }) => {
         }
     }, [authUser]);
 
-    const { mutate: updateProfile, isPending } = useMutation({
+    const {
+        mutate: updateProfile,
+        isPending,
+        isError,
+        error,
+    } = useMutation({
         mutationFn: async ({
             fullname,
             bio,
@@ -73,6 +78,7 @@ const EditUserModal = ({ authUser, closeModal }) => {
                 queryClient.invalidateQueries({ queryKey: ["userProfile"] }),
                 queryClient.invalidateQueries({ queryKey: ["posts"] }),
             ]);
+            closeModal();
         },
     });
 
@@ -107,7 +113,6 @@ const EditUserModal = ({ authUser, closeModal }) => {
                     onSubmit={(e) => {
                         e.preventDefault();
                         updateProfile(formData);
-                        closeModal();
                     }}
                 >
                     <div className="edit-name">
@@ -165,8 +170,11 @@ const EditUserModal = ({ authUser, closeModal }) => {
                         value={formData.link}
                         onChange={handleInputChange}
                     />
-                    <button>Done</button>
+                    <button>{isPending ? "Updating..." : "Done"}</button>
                 </form>
+                {isError && (
+                    <div className="error-message">{error.message}</div>
+                )}
             </div>
         </div>
     );

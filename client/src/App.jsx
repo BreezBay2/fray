@@ -14,7 +14,7 @@ function App() {
         queryFn: async () => {
             try {
                 const res = await fetch("/api/auth/user");
-                const data = res.json();
+                const data = await res.json();
                 if (data.error) {
                     return null;
                 }
