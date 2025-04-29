@@ -50,6 +50,7 @@
     aspect-ratio: 1;
     height: 60px;
     border-radius: 50%;
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
 }
 
 .modal-center textarea {
