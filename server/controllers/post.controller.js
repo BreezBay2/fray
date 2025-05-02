@@ -80,6 +80,14 @@ export const commentOnPost = async (req, res) => {
         post.comments.push(comment);
         await post.save();
 
+        const notification = new Notification({
+            from: userId,
+            to: post.user,
+            type: "comment",
+        });
+
+        await notification.save();
+
         res.status(200).json(post);
     } catch (error) {
         console.log("Error in Comment on Post Controller.", error);
@@ -108,6 +116,14 @@ export const likeUnlikePost = async (req, res) => {
             );
 
             await post.save();
+
+            const notification = new Notification({
+                from: userId,
+                to: post.user,
+                type: "like",
+            });
+
+            await notification.save();
 
             const updatedLikes = post.likes;
             res.status(200).json(updatedLikes);
