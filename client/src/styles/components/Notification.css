@@ -1,0 +1,60 @@
+.notification-container {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 12px 20px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.notification-container img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid #9eacad;
+}
+
+.notification-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: #012b36;
+}
+
+.notification-link:hover {
+    text-decoration: 2px underline;
+}
+
+.notification-icon {
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+}
+
+.notification-user {
+    font-weight: 600;
+}
+
+.notification-time {
+    color: #586e75;
+    font-weight: 500;
+    margin-left: 15px;
+    font-size: 13px;
+}
+
+.like {
+    color: #d43682;
+}
+
+.follow {
+    color: #012b36;
+}
+
+.comment {
+    color: #278bd2;
+}

@@ -99,12 +99,12 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    color: #d43682;
+    color: #dc322f;
 }
 
 .like-container:hover {
     cursor: pointer;
-    color: #d43682;
+    color: #dc322f;
 }
 
 .liked-container:hover {

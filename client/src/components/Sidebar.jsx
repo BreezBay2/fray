@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/components/SideBar.css";
 import { Link } from "react-router-dom";
 import { IoCreateOutline, IoHome, IoLogOutOutline } from "react-icons/io5";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaBell } from "react-icons/fa";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import CreatePostModal from "./CreatePostModal";
 
@@ -52,6 +52,15 @@ const Sidebar = () => {
                             <Link to="/" className="sidebar-link">
                                 <IoHome size={20} />
                                 <h2>Home</h2>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to={"/notifications"}
+                                className="sidebar-link"
+                            >
+                                <FaBell size={20} />
+                                <h2>Notifications</h2>
                             </Link>
                         </li>
                         <li>

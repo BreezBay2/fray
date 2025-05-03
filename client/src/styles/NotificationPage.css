@@ -1,0 +1,10 @@
+.notification-page {
+    min-height: 100vh;
+    width: 60%;
+    max-width: 1000px;
+    padding: 24px 30px;
+}
+
+.notifications-container {
+    padding-top: 10px;
+}

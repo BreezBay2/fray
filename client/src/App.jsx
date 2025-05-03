@@ -3,10 +3,11 @@ import "./App.css";
 import LoginSignupPage from "./pages/LoginSignupPage";
 import { useQuery } from "@tanstack/react-query";
 import HomePage from "./pages/HomePage";
-import Sidebar from "./components/SideBar";
+import Sidebar from "./components/Sidebar";
 import ProfilePage from "./pages/ProfilePage";
 import FeatureBar from "./components/FeatureBar";
 import NotFoundPage from "./pages/NotFoundPage";
+import NotificationPage from "./pages/NotificationPage";
 
 function App() {
     const { data: authUser, isLoading } = useQuery({
@@ -48,6 +49,16 @@ function App() {
                     path="/login"
                     element={
                         !authUser ? <LoginSignupPage /> : <Navigate to="/" />
+                    }
+                />
+                <Route
+                    path="/notifications"
+                    element={
+                        authUser ? (
+                            <NotificationPage />
+                        ) : (
+                            <Navigate to="login" />
+                        )
                     }
                 />
                 <Route
