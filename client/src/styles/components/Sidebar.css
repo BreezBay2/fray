@@ -50,6 +50,7 @@
 }
 
 .sidebar-link {
+    position: relative;
     display: flex;
     justify-content: flex-start;
     gap: 12px;
@@ -58,6 +59,16 @@
     color: #012b36;
     text-decoration: none;
     border-radius: 15px;
+}
+
+.notification-check {
+    position: absolute;
+    top: 8px;
+    left: 35px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #278bd2;
 }
 
 .sidebar-logo {

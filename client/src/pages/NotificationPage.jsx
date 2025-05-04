@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Notification from "../components/Notification";
 
 const NotificationPage = () => {
-    const queryQlient = useQueryClient();
+    const queryClient = useQueryClient();
 
     const { data: notifications, isLoading } = useQuery({
         queryKey: ["notifications"],
@@ -17,12 +17,15 @@ const NotificationPage = () => {
                     throw new Error(data.error || "Something went wrong.");
                 }
 
+                queryClient.invalidateQueries({ queryKey: ["notification"] });
+
                 return data;
             } catch (error) {
                 throw new Error(error);
             }
         },
     });
+
     return (
         <div className="notification-page">
             <h1>Notifications</h1>

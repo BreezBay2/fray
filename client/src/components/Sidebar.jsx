@@ -11,6 +11,25 @@ const Sidebar = () => {
     const { data: authUser } = useQuery({ queryKey: ["authUser"] });
     const queryClient = useQueryClient();
 
+    const { data: notification } = useQuery({
+        queryKey: ["notification"],
+        queryFn: async () => {
+            try {
+                const res = await fetch("/api/notifications/check");
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.error || "Something went wrong.");
+                }
+
+                console.log(data);
+                return data;
+            } catch (error) {
+                throw new Error(error);
+            }
+        },
+    });
+
     const { mutate: logout } = useMutation({
         mutationFn: async () => {
             try {
@@ -61,6 +80,9 @@ const Sidebar = () => {
                             >
                                 <FaBell size={20} />
                                 <h2>Notifications</h2>
+                                {notification?.result === true && (
+                                    <div className="notification-check"></div>
+                                )}
                             </Link>
                         </li>
                         <li>

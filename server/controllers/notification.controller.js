@@ -1,15 +1,37 @@
 import Notification from "../models/notification.model.js";
 
+export const checkNewNotifications = async (req, res) => {
+    try {
+        const userId = req.user._id;
+
+        const notification = await Notification.findOne({
+            to: userId,
+            read: false,
+        });
+
+        if (!notification) {
+            return res.status(200).send({ result: false });
+        }
+
+        res.status(200).json({ result: true });
+    } catch (error) {
+        console.log("Error in Check New Notifications Controller.", error);
+        res.status(500).json({ error: "Internal Server Error." });
+    }
+};
+
 export const getNotifications = async (req, res) => {
     try {
         const userId = req.user._id;
 
         const notifications = await Notification.find({
             to: userId,
-        }).populate({
-            path: "from",
-            select: "username profileImg",
-        });
+        })
+            .sort({ createdAt: -1 })
+            .populate({
+                path: "from",
+                select: "username profileImg",
+            });
 
         await Notification.updateMany({ to: userId }, { read: true });
 
